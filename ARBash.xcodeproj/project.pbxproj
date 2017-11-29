@@ -15,6 +15,8 @@
 		D6727E841FCD246600C010CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6727E821FCD246600C010CC /* LaunchScreen.storyboard */; };
 		D6727E8F1FCD246600C010CC /* ARBashTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6727E8E1FCD246600C010CC /* ARBashTests.swift */; };
 		D6727E9A1FCD246600C010CC /* ARBashUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6727E991FCD246600C010CC /* ARBashUITests.swift */; };
+		D6727EAA1FCD537600C010CC /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6727EA91FCD537600C010CC /* Cube.swift */; };
+		D6727EAC1FCE2C7B00C010CC /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6727EAB1FCE2C7B00C010CC /* Plane.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		D6727E951FCD246600C010CC /* ARBashUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ARBashUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6727E991FCD246600C010CC /* ARBashUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARBashUITests.swift; sourceTree = "<group>"; };
 		D6727E9B1FCD246600C010CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D6727EA91FCD537600C010CC /* Cube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
+		D6727EAB1FCE2C7B00C010CC /* Plane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,8 @@
 				D6727E801FCD246600C010CC /* Assets.xcassets */,
 				D6727E821FCD246600C010CC /* LaunchScreen.storyboard */,
 				D6727E851FCD246600C010CC /* Info.plist */,
+				D6727EA91FCD537600C010CC /* Cube.swift */,
+				D6727EAB1FCE2C7B00C010CC /* Plane.swift */,
 			);
 			path = ARBash;
 			sourceTree = "<group>";
@@ -265,6 +271,8 @@
 			files = (
 				D6727E7C1FCD246600C010CC /* ViewController.swift in Sources */,
 				D6727E781FCD246600C010CC /* AppDelegate.swift in Sources */,
+				D6727EAC1FCE2C7B00C010CC /* Plane.swift in Sources */,
+				D6727EAA1FCD537600C010CC /* Cube.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,6 +439,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q4F5R593P2;
 				INFOPLIST_FILE = ARBash/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = BenMiller.ARBash;
@@ -445,6 +454,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Q4F5R593P2;
 				INFOPLIST_FILE = ARBash/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = BenMiller.ARBash;
