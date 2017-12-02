@@ -15,9 +15,9 @@
 		D6727E9A1FCD246600C010CC /* ARBashUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6727E991FCD246600C010CC /* ARBashUITests.swift */; };
 		D6B454E91FD24DF500284E9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D6B454E81FD24DF500284E9F /* Main.storyboard */; };
 		D6B454EB1FD24E0500284E9F /* Assets.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = D6B454EA1FD24E0500284E9F /* Assets.scnassets */; };
-		D6B454EE1FD24E0E00284E9F /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B454EC1FD24E0E00284E9F /* Plane.swift */; };
-		D6B454EF1FD24E0E00284E9F /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B454ED1FD24E0E00284E9F /* Cube.swift */; };
 		D6B454F11FD24F5800284E9F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B454F01FD24F5800284E9F /* ViewController.swift */; };
+		D6B454F31FD250DC00284E9F /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B454F21FD250DC00284E9F /* Cube.swift */; };
+		D6B454F51FD250EA00284E9F /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B454F41FD250EA00284E9F /* Plane.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,9 +52,9 @@
 		D6727E9B1FCD246600C010CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6B454E81FD24DF500284E9F /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		D6B454EA1FD24E0500284E9F /* Assets.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = Assets.scnassets; sourceTree = "<group>"; };
-		D6B454EC1FD24E0E00284E9F /* Plane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Plane.swift; path = ../../../ARJazz/ARJazz/Plane.swift; sourceTree = "<group>"; };
-		D6B454ED1FD24E0E00284E9F /* Cube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Cube.swift; path = ../../../ARJazz/ARJazz/Cube.swift; sourceTree = "<group>"; };
 		D6B454F01FD24F5800284E9F /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D6B454F21FD250DC00284E9F /* Cube.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
+		D6B454F41FD250EA00284E9F /* Plane.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,8 +106,8 @@
 			isa = PBXGroup;
 			children = (
 				D6B454F01FD24F5800284E9F /* ViewController.swift */,
-				D6B454ED1FD24E0E00284E9F /* Cube.swift */,
-				D6B454EC1FD24E0E00284E9F /* Plane.swift */,
+				D6B454F21FD250DC00284E9F /* Cube.swift */,
+				D6B454F41FD250EA00284E9F /* Plane.swift */,
 				D6B454EA1FD24E0500284E9F /* Assets.scnassets */,
 				D6727E771FCD246600C010CC /* AppDelegate.swift */,
 				D6B454E81FD24DF500284E9F /* Main.storyboard */,
@@ -274,9 +274,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6727E781FCD246600C010CC /* AppDelegate.swift in Sources */,
-				D6B454EF1FD24E0E00284E9F /* Cube.swift in Sources */,
+				D6B454F31FD250DC00284E9F /* Cube.swift in Sources */,
+				D6B454F51FD250EA00284E9F /* Plane.swift in Sources */,
 				D6B454F11FD24F5800284E9F /* ViewController.swift in Sources */,
-				D6B454EE1FD24E0E00284E9F /* Plane.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

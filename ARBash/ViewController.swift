@@ -16,45 +16,73 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 	@IBOutlet weak var sessionInfoLabel: UILabel!
 	@IBOutlet weak var sceneView: ARSCNView!
   var planes = NSMutableDictionary()
+  var cubes = NSMutableArray()
 	// MARK: - View Life Cycle
 	
     /// - Tag: StartARSession
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
 
-        guard ARWorldTrackingConfiguration.isSupported else {
-            fatalError("""
-                ARKit is not available on this device. For apps that require ARKit
-                for core functionality, use the `arkit` key in the key in the
-                `UIRequiredDeviceCapabilities` section of the Info.plist to prevent
-                the app from installing. (If the app can't be installed, this error
-                can't be triggered in a production scenario.)
-                In apps where AR is an additive feature, use `isSupported` to
-                determine whether to show UI for launching AR experiences.
-            """) // For details, see https://developer.apple.com/documentation/arkit
-        }
-        
-        /*
-         Start the view's AR session with a configuration that uses the rear camera,
-         device position and orientation tracking, and plane detection.
-        */
-        let configuration = ARWorldTrackingConfiguration()
-        configuration.planeDetection = .horizontal
-        sceneView.session.run(configuration)
-
-        // Set a delegate to track the number of plane anchors for providing UI feedback.
-        sceneView.session.delegate = self
-        
-        /*
-         Prevent the screen from being dimmed after a while as users will likely
-         have long periods of interaction without touching the screen or buttons.
-        */
-        UIApplication.shared.isIdleTimerDisabled = true
-        
-        // Show debug UI to view performance metrics (e.g. frames per second).
-        sceneView.showsStatistics = true
+    guard ARWorldTrackingConfiguration.isSupported else {
+      fatalError("""
+          ARKit is not available on this device. For apps that require ARKit
+          for core functionality, use the `arkit` key in the key in the
+          `UIRequiredDeviceCapabilities` section of the Info.plist to prevent
+          the app from installing. (If the app can't be installed, this error
+          can't be triggered in a production scenario.)
+          In apps where AR is an additive feature, use `isSupported` to
+          determine whether to show UI for launching AR experiences.
+      """) // For details, see https://developer.apple.com/documentation/arkit
     }
+    
+    /*
+     Start the view's AR session with a configuration that uses the rear camera,
+     device position and orientation tracking, and plane detection.
+    */
+    let configuration = ARWorldTrackingConfiguration()
+    configuration.planeDetection = .horizontal
+    sceneView.session.run(configuration)
+
+    // Set a delegate to track the number of plane anchors for providing UI feedback.
+    sceneView.session.delegate = self
+    
+    /*
+     Prevent the screen from being dimmed after a while as users will likely
+     have long periods of interaction without touching the screen or buttons.
+    */
+    UIApplication.shared.isIdleTimerDisabled = true
+    
+    // Show debug UI to view performance metrics (e.g. frames per second).
+    sceneView.showsStatistics = true
+  
+  
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.insertCube(_:)))
+    sceneView.addGestureRecognizer(tapGesture)
+  }
 	
+  @objc func insertCube(_ sender: UITapGestureRecognizer){
+    let tapLocation = sender.location(in: sceneView);
+    var result = sceneView.hitTest(tapLocation, types: ARHitTestResult.ResultType.existingPlaneUsingExtent)
+    
+    if (result.count == 0) {
+      return;
+    }
+    var hitResult = result.first
+    
+    let insertionOffset = 0.5
+    var position = SCNVector3Make(
+      (hitResult?.worldTransform.columns.3.x)!,
+      (hitResult?.worldTransform.columns.3.y)! + Float(insertionOffset),
+      (hitResult?.worldTransform.columns.3.z)!
+    )
+    
+    var cube = Cube()
+    cube.placeAtPosition(position: position)
+    cubes.add(cube)
+    sceneView.scene.rootNode.addChildNode(cube)
+    
+  }
+  
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)
 		
