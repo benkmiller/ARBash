@@ -18,8 +18,8 @@ class Plane: SCNNode{
     //called in render:didadd:node
     func initPlane(anchor: ARPlaneAnchor, isHidden: Bool){
         self.anchor = anchor
-        //var width = anchor.extent.x
-        //var length = anchor.extent.x
+        var width = anchor.extent.x
+        var length = anchor.extent.x
         let planeHeight = 0.1
         
         print("inside initPLane")
@@ -28,7 +28,7 @@ class Plane: SCNNode{
         transparentMaterial.diffuse.contents = UIColor(white: 1.0, alpha: 0.0)
         let material = SCNMaterial()
         material.diffuse.contents = UIColor(white: 1.0, alpha: 0.5)
-        
+      planeActual = SCNBox(width: CGFloat(width), height: CGFloat(planeHeight), length: CGFloat(length), chamferRadius: 0)
         planeActual!.materials = [transparentMaterial, transparentMaterial, transparentMaterial, transparentMaterial, material, transparentMaterial]
         
         let planeNode = SCNNode(geometry: planeActual)
