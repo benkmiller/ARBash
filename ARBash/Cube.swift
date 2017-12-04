@@ -47,13 +47,18 @@ class Cube: SCNNode{
     
     
     cubeNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
-    cubeNode.physicsBody!.isAffectedByGravity = false
+    cubeNode.physicsBody!.isAffectedByGravity = true
     //cubeNode.physicsBody!.mass = 2.0
     
     //cubeNode.physicsBody!.categoryBitMask = SCNPhysicsCollisionCategory.
     //cubeNode.physicsBody!.applyForce(SCNVector3Make(0, 0, 5), asImpulse: true)
+    print("x= " ,direction.x*2)
+    print("y= " , direction.y*2)
+    print("z= " , direction.z*2)
+    
+    let vect = SCNVector3Make(direction.x*10, direction.y*10, direction.z*10)
     cubeNode.position = position
-    cubeNode.physicsBody!.applyForce(direction, asImpulse: true)
+    cubeNode.physicsBody!.applyForce(vect, asImpulse: true)
     
     // SceneKit/AR coordinates are in meters
     

@@ -18,11 +18,11 @@ class Plane: SCNNode{
     //called in render:didadd:node
     func initPlane(anchor: ARPlaneAnchor, isHidden: Bool){
         self.anchor = anchor
-        var width = anchor.extent.x
-        var length = anchor.extent.x
+        let width = anchor.extent.x
+        let length = anchor.extent.x
         let planeHeight = 0.1
         
-        print("inside initPLane")
+        //print("inside initPLane")
         //little iffy about this
         let transparentMaterial = SCNMaterial()
         transparentMaterial.diffuse.contents = UIColor(white: 1.0, alpha: 0.0)
@@ -36,8 +36,6 @@ class Plane: SCNNode{
         planeNode.physicsBody = SCNPhysicsBody(type: SCNPhysicsBodyType.kinematic, shape: SCNPhysicsShape(geometry: planeActual!, options: nil))
         
         addChildNode(planeNode)
-        
-        
         
     }
     
