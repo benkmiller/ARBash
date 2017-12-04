@@ -58,16 +58,21 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
   
     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.insertCube(_:)))
     sceneView.addGestureRecognizer(tapGesture)
+    
+    let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.throwCube(_:)))
+    longGesture.minimumPressDuration = 0.5
+    sceneView.addGestureRecognizer(longGesture)
   }
 	
-  @objc func insertCube(_ sender: UITapGestureRecognizer){
+  @objc
+  func insertCube(_ sender: UITapGestureRecognizer){
     let tapLocation = sender.location(in: sceneView);
     var result = sceneView.hitTest(tapLocation, types: ARHitTestResult.ResultType.existingPlaneUsingExtent)
     
     if (result.count == 0) {
       return;
     }
-    var hitResult = result.first
+    let hitResult = result.first
     
     let insertionOffset = 0.5
     var position = SCNVector3Make(
@@ -76,12 +81,39 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
       (hitResult?.worldTransform.columns.3.z)!
     )
     
-    var cube = Cube()
+    let cube = Cube()
     cube.placeAtPosition(position: position)
     cubes.add(cube)
     sceneView.scene.rootNode.addChildNode(cube)
     
   }
+  @objc
+  func throwCube(_ sender: UILongPressGestureRecognizer){
+    let (direction, position) = self.getUserVector()
+    
+    
+    
+    var cube = Cube()
+  
+    //cube.placeAtPosition(position: position)
+    cube.throwCube(position: position, direction: direction)
+    cubes.add(cube)
+    
+    sceneView.scene.rootNode.addChildNode(cube)
+    
+  }
+  
+  func getUserVector() -> (SCNVector3, SCNVector3) { // (direction, position)
+    if let frame = self.sceneView.session.currentFrame {
+      let mat = SCNMatrix4(frame.camera.transform) // 4x4 transform matrix describing camera in world space
+      let dir = SCNVector3(-1 * mat.m31, -1 * mat.m32, -1 * mat.m33) // orientation of camera in world space
+      let pos = SCNVector3(mat.m41, mat.m42, mat.m43) // location of camera in world space
+      
+      return (dir, pos)
+    }
+    return (SCNVector3(0, 0, -1), SCNVector3(0, 0, -0.2))
+  }
+  
   
 	override func viewWillDisappear(_ animated: Bool) {
 		super.viewWillDisappear(animated)

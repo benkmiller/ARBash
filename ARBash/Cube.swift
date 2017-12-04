@@ -11,32 +11,66 @@ import SceneKit
 
 class Cube: SCNNode{
     
-    func placeAtPosition(position:SCNVector3){
-        let cubeNode = SCNNode(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0))
+  func placeAtPosition(position:SCNVector3){
+      let cubeNode = SCNNode(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0))
 
-        //cubeNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
-
-
-        cubeNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
-        cubeNode.physicsBody!.mass = 2.0
-        //cubeNode.physicsBody!.categoryBitMask = SCNPhysicsCollisionCategory.
-
-        cubeNode.position = position // SceneKit/AR coordinates are in meters
+      //cubeNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
 
 
+      cubeNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+      //cubeNode.physicsBody?.isAffectedByGravity = false
+      cubeNode.physicsBody!.mass = 2.0
+      //cubeNode.physicsBody!.categoryBitMask = SCNPhysicsCollisionCategory.
 
-        //cubeNode.physicsBody = [SCNPhysicsBodybodyWithType:SCNPhysicsBodyTypeDynamic shape:nil];
-        //cubeNode.physicsBody.mass = 2.0;
-        //cubeNode.physicsBody.categoryBitMask = CollisionCategoryCube;
-        //cubeNode.position = position;
+      cubeNode.position = position // SceneKit/AR coordinates are in meters
 
 
 
-        self.addChildNode(cubeNode)
-    }
+      //cubeNode.physicsBody = [SCNPhysicsBodybodyWithType:SCNPhysicsBodyTypeDynamic shape:nil];
+      //cubeNode.physicsBody.mass = 2.0;
+      //cubeNode.physicsBody.categoryBitMask = CollisionCategoryCube;
+      //cubeNode.position = position;
+
+
+
+      self.addChildNode(cubeNode)
+  }
   
-    func remove(){
-        
-    }
+  
+  
+  
+  
+  func throwCube(position:SCNVector3, direction: SCNVector3){
+    let cubeNode = SCNNode(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0))
+    
+    //cubeNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+    
+    
+    cubeNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+    cubeNode.physicsBody!.isAffectedByGravity = false
+    //cubeNode.physicsBody!.mass = 2.0
+    
+    //cubeNode.physicsBody!.categoryBitMask = SCNPhysicsCollisionCategory.
+    //cubeNode.physicsBody!.applyForce(SCNVector3Make(0, 0, 5), asImpulse: true)
+    cubeNode.position = position
+    cubeNode.physicsBody!.applyForce(direction, asImpulse: true)
+    
+    // SceneKit/AR coordinates are in meters
+    
+    
+    
+    //cubeNode.physicsBody = [SCNPhysicsBodybodyWithType:SCNPhysicsBodyTypeDynamic shape:nil];
+    //cubeNode.physicsBody.mass = 2.0;
+    //cubeNode.physicsBody.categoryBitMask = CollisionCategoryCube;
+    //cubeNode.position = position;
+    
+    
+    
+    self.addChildNode(cubeNode)
+  }
+  
+  func remove(){
+    
+  }
     
 }
