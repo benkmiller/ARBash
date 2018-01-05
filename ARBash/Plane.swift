@@ -28,7 +28,7 @@ class Plane: SCNNode{
         transparentMaterial.diffuse.contents = UIColor(white: 1.0, alpha: 0.0)
         let material = SCNMaterial()
         material.diffuse.contents = UIColor(white: 1.0, alpha: 0.5)
-      planeActual = SCNBox(width: CGFloat(width), height: CGFloat(planeHeight), length: CGFloat(length), chamferRadius: 0)
+        planeActual = SCNBox(width: CGFloat(width), height: CGFloat(planeHeight), length: CGFloat(length), chamferRadius: 0)
         planeActual!.materials = [transparentMaterial, transparentMaterial, transparentMaterial, transparentMaterial, material, transparentMaterial]
         
         let planeNode = SCNNode(geometry: planeActual)
@@ -47,6 +47,15 @@ class Plane: SCNNode{
         let node = childNodes.first
         node?.physicsBody = SCNPhysicsBody(type:SCNPhysicsBodyType.kinematic, shape: SCNPhysicsShape(geometry: planeActual!, options: nil))
     }
+    
+//    func updateToFloor(anchor: ARPlaneAnchor){
+//        planeActual!.width = 500.0
+//        planeActual!.height = 500.0
+//        //position = SCNVector3Make(anchor.center.x, 0, anchor.center.z)
+//
+//        let node = childNodes.first
+//        node?.physicsBody = SCNPhysicsBody(type:SCNPhysicsBodyType.kinematic, shape: SCNPhysicsShape(geometry: planeActual!, options: nil))
+//    }
     
     func hide(){
         
