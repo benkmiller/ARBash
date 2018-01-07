@@ -10,7 +10,6 @@ import SceneKit
 import ARKit
 
 class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
-	// MARK: - IBOutlets
 
     @IBOutlet weak var sessionInfoView: UIView!
 	@IBOutlet weak var sessionInfoLabel: UILabel!
@@ -49,14 +48,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
   
     // MARK: - Scene Node Interntion
-    
-    
-//    func makePlaneFloor(planeId: UUID){
-//        guard let plane = self.planes.object(forKey: planeId) else {
-//            print("plane not found")
-//            return
-//        }
-//    }
 
     func setup(){
         /*
@@ -99,7 +90,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         let pov = sceneView.pointOfView!
         let y = (Float(arc4random_uniform(30)) - 29) * 0.01 // Random Y Value between -0.3 and 0.3
-        //let y = Float(0)
+
         //Random X and Z value around the circle
         let xRad = ((Float(arc4random_uniform(361)) - 180)/180) * Float.pi
         let zRad = ((Float(arc4random_uniform(361)) - 180)/180) * Float.pi
@@ -108,12 +99,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         let z = length * cos(zRad)
         let position = SCNVector3Make(x, y, z)
         let worldPosition = pov.convertPosition(position, to: nil)
-        //let alienNode = AlienNode(alien: alien, position: worldPosition, cameraPosition: pov.position)
 
         game.addEnemy()
         
         let enemy = Enemy()
-        //enemy.placeAtPosition(position: position)
         enemy.placeAtPosition(position: worldPosition)
         enemies.add(enemy)
         sceneView.scene.rootNode.addChildNode(enemy)
@@ -126,13 +115,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         game.removeEnemy()
         
     }
-    
-    func moveEnemies(){
-        
-    }
-    //func removeEnemy(){
-        
-    //}
     
     @IBAction
     func insertCube(_ sender: UITapGestureRecognizer){
@@ -195,7 +177,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     /// - Tag: PlaceARContent
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        //print("inrender2")
         // Place content only for anchors found by plane detection.
         guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
 
@@ -208,17 +189,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     /// - Tag: UpdateARContent
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        //print("in renderer")
         // Update content only for plane anchors and nodes matching the setup created in `renderer(_:didAdd:for:)`.
         guard let planeAnchor = anchor as?  ARPlaneAnchor else { return }
 
         let plane = self.planes.object(forKey: planeAnchor.identifier) as! Plane
 
         plane.update(anchor:planeAnchor)
-
-          // Plane estimation may shift the center of a plane relative to its anchor's transform.
-          //planeNode.simdPosition = float3(planeAnchor.center.x, 0, planeAnchor.center.z)
-
     }
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
