@@ -18,6 +18,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     var planes = NSMutableDictionary()
     var cubes = NSMutableArray()
     var enemies = NSMutableArray()
+    var game = GameModel()
     
 	// MARK: - View Life Cycle
 	
@@ -80,22 +81,24 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         sceneView.showsStatistics = true
         setupTapRecognizers()
     }
+    
     func setupTapRecognizers(){
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.insertCube(_:)))
         sceneView.addGestureRecognizer(tapGesture)
         
-        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.insertFloor(_:)))
-        doubleTapGesture.numberOfTapsRequired = 2
-        sceneView.addGestureRecognizer(doubleTapGesture)
+        //let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(self.insertFloor(_:)))
+        //doubleTapGesture.numberOfTapsRequired = 2
+        //sceneView.addGestureRecognizer(doubleTapGesture)
         
         let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.throwCube(_:)))
         longGesture.minimumPressDuration = 0.5
         sceneView.addGestureRecognizer(longGesture)
     }
+    
     func spawn(){
         let pov = sceneView.pointOfView!
         let y = (Float(arc4random_uniform(60)) - 29) * 0.01 // Random Y Value between -0.3 and 0.3
-        
+
         //Random X and Z value around the circle
         let xRad = ((Float(arc4random_uniform(361)) - 180)/180) * Float.pi
         let zRad = ((Float(arc4random_uniform(361)) - 180)/180) * Float.pi
@@ -105,14 +108,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         let position = SCNVector3Make(x, y, z)
         let worldPosition = pov.convertPosition(position, to: nil)
         //let alienNode = AlienNode(alien: alien, position: worldPosition, cameraPosition: pov.position)
-        
+
         let enemy = Enemy()
-        enemy.placeAtPosition(position: position)
+        //enemy.placeAtPosition(position: position)
+        enemy.placeAtPosition(position: worldPosition)
         enemies.add(enemy)
         sceneView.scene.rootNode.addChildNode(enemy)
-        
-        
-        
+
+
+
     }
     
     func moveEnemies(){
@@ -143,12 +147,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         cube.placeAtPosition(position: position)
         cubes.add(cube)
         sceneView.scene.rootNode.addChildNode(cube)
-
     }
     
     
     
-    @IBAction func insertFloor(_ sender: UITapGestureRecognizer){
+    @objc func insertFloor(_ sender: UITapGestureRecognizer){
         let tapLocation = sender.location(in: sceneView);
         let result = sceneView.hitTest(tapLocation, types: ARHitTestResult.ResultType.existingPlaneUsingExtent)
         
@@ -161,7 +164,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     
-    @IBAction
+    @objc
     func throwCube(_ sender: UILongPressGestureRecognizer){
         if (sender.state == UIGestureRecognizerState.ended) {
             let (direction, position) = self.getUserVector()
@@ -200,7 +203,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
         planes.setObject(plane, forKey: planeAnchor.identifier as NSCopying)
         node.addChildNode(plane)
-    
     }
 
     /// - Tag: UpdateARContent
@@ -219,7 +221,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        
+        if game.isTimeToSpawn(){
+            spawn()
+        }
+        game.incSpawn()
     }
 
     // MARK: - ARSessionDelegate

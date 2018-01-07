@@ -13,6 +13,7 @@ class Cube: SCNNode{
     
   func placeAtPosition(position:SCNVector3){
       let cubeNode = SCNNode(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0))
+    
 
       //cubeNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
 
@@ -31,7 +32,7 @@ class Cube: SCNNode{
 
 
 
-      self.addChildNode(cubeNode)
+      //addChildNode(cubeNode)
   }
   
   

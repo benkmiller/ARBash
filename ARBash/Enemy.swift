@@ -9,11 +9,15 @@
 import Foundation
 import SceneKit
 
-class Enemy: SCNNode{
+class Enemy:SCNNode {
+    
+    //var cubeNode: SCNNode
+    //init() {
+        //cubeNode = SCNNode(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0))
+    //}
+
     func placeAtPosition(position:SCNVector3){
         let cubeNode = SCNNode(geometry: SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0))
-        
-        //cubeNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
         
         
         cubeNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
@@ -35,9 +39,11 @@ class Enemy: SCNNode{
     
     
     //move enemy towards toPosition, normally towards player
-    func move(toPosition: SCNVector3) -> Bool {
-        //let deltaPos = (toPosition - node.position)
-        
-        return false
-    }
+//    func move(toPosition: SCNVector3, ) -> Bool {
+//        let deltaPos = (toPosition - node.position)
+//        guard deltaPos >= 0.05 else {return false}
+//        
+//        return false
+//    }
 }
+
