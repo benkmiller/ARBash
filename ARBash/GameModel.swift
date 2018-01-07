@@ -13,7 +13,7 @@ class GameModel {
     var enemyCount = 0
     var spawnNum = 0
     let spawnNew = 100
-    let maxEnemies = 10
+    let maxEnemies = 3
     
     var deadFlag = false
     
